@@ -1,11 +1,11 @@
 // src/ai/flows/ai-outfit-visualizer.ts
 'use server';
 /**
- * @fileOverview AI Outfit Visualizer Flow - identifies fashion items in an image, provides semantic labels, and visualizes them on a neutral virtual model.
+ * @fileOverview AI 穿搭模擬器流程 - 辨識圖片中的時尚單品，提供語義標籤，並在一個中性的虛擬模特兒身上進行視覺化呈現。
  *
- * - aiOutfitVisualizer - A function that handles the outfit visualization process.
- * - AiOutfitVisualizerInput - The input type for the aiOutfitVisualizer function.
- * - AiOutfitVisualizerOutput - The return type for the aiOutfitVisualizer function.
+ * - aiOutfitVisualizer - 處理穿搭模擬流程的函式。
+ * - AiOutfitVisualizerInput - aiOutfitVisualizer 函式的輸入型別。
+ * - AiOutfitVisualizerOutput - aiOutfitVisualizer 函式的回傳型別。
  */
 
 import {ai} from '@/ai/genkit';
@@ -16,7 +16,7 @@ const AiOutfitVisualizerInputSchema = z.object({
   photoDataUri: z
     .string()
     .describe(
-      "A photo of an outfit, as a data URI that must include a MIME type and use Base64 encoding. Expected format: 'data:<mimetype>;base64,<encoded_data>'."
+      "一張穿搭照片，格式為包含 MIME 類型並使用 Base64 編碼的 data URI。預期格式：'data:<mimetype>;base64,<encoded_data>'。"
     ),
 });
 export type AiOutfitVisualizerInput = z.infer<typeof AiOutfitVisualizerInputSchema>;
@@ -24,11 +24,11 @@ export type AiOutfitVisualizerInput = z.infer<typeof AiOutfitVisualizerInputSche
 const AiOutfitVisualizerOutputSchema = z.object({
   identifiedItems: z.array(
     z.object({
-      label: z.string().describe('A semantic label for the fashion item.'),
-      imageUrl: z.string().describe('URL of the identified fashion item on the virtual model.'),
+      label: z.string().describe('時尚單品的語義標籤。'),
+      imageUrl: z.string().describe('已辨識時尚單品在虛擬模特兒身上的圖片 URL。'),
     })
-  ).describe('A list of identified fashion items and their labels.'),
-  overallStyleDescription: z.string().describe('A description of the overall style of the outfit.'),
+  ).describe('已辨識的時尚單品及其標籤清單。'),
+  overallStyleDescription: z.string().describe('對穿搭整體風格的描述。'),
 });
 export type AiOutfitVisualizerOutput = z.infer<typeof AiOutfitVisualizerOutputSchema>;
 
@@ -40,11 +40,9 @@ const analyzeOutfitPrompt = ai.definePrompt({
   name: 'analyzeOutfitPrompt',
   input: {schema: AiOutfitVisualizerInputSchema},
   output: {schema: AiOutfitVisualizerOutputSchema},
-  prompt: `You are a fashion expert. Analyze the provided outfit photo and identify the fashion items, providing semantic labels for each.
+  prompt: `您是一位時尚專家。請分析提供的穿搭照片，辨識其中的時尚單品，並為每個單品提供語義標籤。同時，也請產生一段關於該穿搭整體風格的描述。
 
-  Also, generate a description of the overall style of the outfit.
-
-  Output the identified items with semantic labels, and the overall style description, using the specified schema.
+  請使用指定的結構，輸出已辨識的單品及其語義標籤，以及整體風格的描述。
 
   Photo: {{media url=photoDataUri}}
 `,
@@ -59,14 +57,14 @@ const aiOutfitVisualizerFlow = ai.defineFlow(
   async input => {
     const outfitAnalysis = await analyzeOutfitPrompt(input);
     if (!outfitAnalysis.output) {
-      throw new Error('No outfit analysis returned from the prompt.');
+      throw new Error('提示未返回任何穿搭分析結果。');
     }
     // Generate images for each fashion item visualized on a neutral model
     const visualizedItems = await Promise.all(
       outfitAnalysis.output.identifiedItems.map(async (item) => {
           const imageGenResult = await ai.generate({
               model: 'googleai/gemini-2.0-flash-preview-image-generation',
-              prompt: `Generate an image of a neutral, non-gendered virtual model wearing a ${item.label}. Focus on the garment itself, not the model's features.  The model should be in a neutral pose.`, // Adjusted prompt
+              prompt: `產生一張中性、無性別的虛擬模特兒穿著 ${item.label} 的圖片。請專注於服裝本身，而非模特兒的特徵。模特兒應保持中性姿勢。`,
               config: {
                   responseModalities: ['TEXT', 'IMAGE'],
               },
@@ -85,4 +83,3 @@ const aiOutfitVisualizerFlow = ai.defineFlow(
     };
   }
 );
-

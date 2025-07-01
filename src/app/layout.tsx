@@ -10,9 +10,9 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "Lucent",
+  title: "Lucent - 您的風格與內容助理",
   description:
-    "A style and content assistant to align your digital presence with your personal essence.",
+    "一個風格與內容助理，讓您的數位形象與個人本質保持一致。",
 };
 
 export default function RootLayout({
@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="zh-TW" suppressHydrationWarning>
       <head />
       <body className={cn("font-body antialiased", lora.variable)}>
         {children}

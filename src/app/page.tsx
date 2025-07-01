@@ -35,22 +35,22 @@ export default function DashboardPage() {
           <div className="overflow-x-auto pb-2">
             <TabsList className="grid h-auto w-full min-w-max grid-cols-6">
               <TabsTrigger value="style-insight" className="gap-2">
-                <Palette className="h-4 w-4" /> Style Insight
+                <Palette className="h-4 w-4" /> 風格洞察
               </TabsTrigger>
               <TabsTrigger value="alignment" className="gap-2">
-                <HeartHandshake className="h-4 w-4" /> Alignment
+                <HeartHandshake className="h-4 w-4" /> 一致性分析
               </TabsTrigger>
               <TabsTrigger value="compass" className="gap-2">
-                <Compass className="h-4 w-4" /> Compass
+                <Compass className="h-4 w-4" /> 內容羅盤
               </TabsTrigger>
               <TabsTrigger value="outfit-visualizer" className="gap-2">
-                <Shirt className="h-4 w-4" /> Outfit Visualizer
+                <Shirt className="h-4 w-4" /> 穿搭模擬器
               </TabsTrigger>
               <TabsTrigger value="growth-trail" className="gap-2">
-                <LineChart className="h-4 w-4" /> Growth Trail
+                <LineChart className="h-4 w-4" /> 成長足跡
               </TabsTrigger>
               <TabsTrigger value="cadence-planner" className="gap-2">
-                <SlidersHorizontal className="h-4 w-4" /> Cadence
+                <SlidersHorizontal className="h-4 w-4" /> 節奏規劃
               </TabsTrigger>
             </TabsList>
           </div>

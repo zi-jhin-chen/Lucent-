@@ -33,9 +33,9 @@ import { runSeasonalContentCompass } from "@/app/actions";
 import type { SeasonalContentCompassOutput } from "@/ai/flows/seasonal-content-compass";
 
 const formSchema = z.object({
-  currentSeason: z.string({ required_error: "Please select a season." }),
-  mood: z.string({ required_error: "Please select a mood." }),
-  platform: z.string({ required_error: "Please select a platform." }),
+  currentSeason: z.string({ required_error: "請選擇一個季節。" }),
+  mood: z.string({ required_error: "請選擇一種心情。" }),
+  platform: z.string({ required_error: "請選擇一個平台。" }),
 });
 
 export function ContentCompass() {
@@ -57,7 +57,7 @@ export function ContentCompass() {
       setResult(response.data);
     } else {
       toast({
-        title: "Suggestion Failed",
+        title: "建議失敗",
         description: response.error,
         variant: "destructive",
       });
@@ -68,10 +68,9 @@ export function ContentCompass() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Seasonal Content Compass</CardTitle>
+        <CardTitle>季節性內容羅盤</CardTitle>
         <CardDescription>
-          A tone compass that nudges theme clusters and suggests soft-focus post
-          structures for your chosen platform.
+          一個風格羅盤，能為您選擇的平台提供主題建議和貼文結構。
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-6 md:grid-cols-2">
@@ -82,21 +81,21 @@ export function ContentCompass() {
               name="currentSeason"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Season</FormLabel>
+                  <FormLabel>季節</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select the current season" />
+                        <SelectValue placeholder="選擇目前季節" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="Spring">Spring</SelectItem>
-                      <SelectItem value="Summer">Summer</SelectItem>
-                      <SelectItem value="Autumn">Autumn</SelectItem>
-                      <SelectItem value="Winter">Winter</SelectItem>
+                      <SelectItem value="Spring">春季</SelectItem>
+                      <SelectItem value="Summer">夏季</SelectItem>
+                      <SelectItem value="Autumn">秋季</SelectItem>
+                      <SelectItem value="Winter">冬季</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -108,31 +107,31 @@ export function ContentCompass() {
               name="mood"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Your Current Vibe</FormLabel>
+                  <FormLabel>您當下的氛圍</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select your current mood or energy" />
+                        <SelectValue placeholder="選擇您當下的心情或能量" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
                       <SelectItem value="Early summer calm">
-                        Early summer calm
+                        初夏的寧靜
                       </SelectItem>
                       <SelectItem value="Deep creative energy">
-                        Deep creative energy
+                        深度的創作能量
                       </SelectItem>
                       <SelectItem value="Quietly reflective">
-                        Quietly reflective
+                        靜靜地反思
                       </SelectItem>
                       <SelectItem value="Playful and bright">
-                        Playful and bright
+                        俏皮而明亮
                       </SelectItem>
                       <SelectItem value="Focused and grounded">
-                        Focused and grounded
+                        專注而踏實
                       </SelectItem>
                     </SelectContent>
                   </Select>
@@ -145,14 +144,14 @@ export function ContentCompass() {
               name="platform"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Platform</FormLabel>
+                  <FormLabel>平台</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a social media platform" />
+                        <SelectValue placeholder="選擇一個社群媒體平台" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -167,12 +166,12 @@ export function ContentCompass() {
             />
 
             <Button type="submit" disabled={loading}>
-              {loading ? "Guiding..." : "Find My Compass"}
+              {loading ? "指引中..." : "尋找我的羅盤"}
             </Button>
           </form>
         </Form>
         <div className="flex flex-col gap-4">
-          <h3 className="font-headline text-lg">Your Compass Reading</h3>
+          <h3 className="font-headline text-lg">您的羅盤讀取結果</h3>
           <div className="min-h-[300px] rounded-lg border border-dashed border-muted p-4">
             {loading && (
                <div className="space-y-4">
@@ -189,7 +188,7 @@ export function ContentCompass() {
               <div className="space-y-4">
                  <Card>
                   <CardHeader>
-                    <CardTitle className="text-base">Suggested Theme</CardTitle>
+                    <CardTitle className="text-base">建議主題</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-2xl font-headline text-accent-foreground">{result.theme}</p>
@@ -197,7 +196,7 @@ export function ContentCompass() {
                  </Card>
                  <Card>
                   <CardHeader>
-                    <CardTitle className="text-base">Soft-Focus Post Structure</CardTitle>
+                    <CardTitle className="text-base">貼文結構建議</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-foreground/80 whitespace-pre-wrap">{result.postStructure}</p>
@@ -207,7 +206,7 @@ export function ContentCompass() {
             )}
             {!loading && !result && (
               <div className="flex h-full items-center justify-center text-muted-foreground">
-                <p>Your content direction will appear here.</p>
+                <p>您的內容方向將會出現在這裡。</p>
               </div>
             )}
           </div>

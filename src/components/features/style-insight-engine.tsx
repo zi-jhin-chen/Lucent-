@@ -31,8 +31,8 @@ export function StyleInsightEngine() {
     if (selectedFile) {
       if (selectedFile.size > 4 * 1024 * 1024) {
         toast({
-          title: "File too large",
-          description: "Please upload an image smaller than 4MB.",
+          title: "檔案太大",
+          description: "請上傳小於 4MB 的圖片。",
           variant: "destructive",
         });
         return;
@@ -86,8 +86,8 @@ export function StyleInsightEngine() {
   const handleSubmit = async () => {
     if (!file) {
       toast({
-        title: "No file selected",
-        description: "Please upload an image to analyze.",
+        title: "未選擇檔案",
+        description: "請上傳要分析的圖片。",
         variant: "destructive",
       });
       return;
@@ -106,7 +106,7 @@ export function StyleInsightEngine() {
         setResult(response.data);
       } else {
         toast({
-          title: "Analysis Failed",
+          title: "分析失敗",
           description: response.error,
           variant: "destructive",
         });
@@ -116,8 +116,8 @@ export function StyleInsightEngine() {
     reader.onerror = (error) => {
       console.error("FileReader error:", error);
       toast({
-        title: "File Read Error",
-        description: "Could not read the selected file.",
+        title: "檔案讀取錯誤",
+        description: "無法讀取所選檔案。",
         variant: "destructive",
       });
       setLoading(false);
@@ -127,10 +127,9 @@ export function StyleInsightEngine() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Style Insight Engine</CardTitle>
+        <CardTitle>風格洞察引擎</CardTitle>
         <CardDescription>
-          Upload a moodboard, outfit, or post capture to get soft-labeled
-          visual clusters and thematic tags.
+          上傳風格板、穿搭或貼文截圖，以獲得視覺分類和主題標籤。
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-6 md:grid-cols-2">
@@ -146,10 +145,10 @@ export function StyleInsightEngine() {
             >
               <UploadCloud className="h-10 w-10 text-muted-foreground" />
               <span className="font-medium text-primary">
-                Drag & drop or click to upload
+                拖放或點擊以上傳
               </span>
               <span className="text-sm text-muted-foreground">
-                PNG, JPG, GIF up to 4MB
+                支援 PNG, JPG, GIF 格式，最大 4MB
               </span>
               <Input
                 id="style-insight-file"
@@ -176,18 +175,18 @@ export function StyleInsightEngine() {
                 onClick={clearFile}
               >
                 <X className="h-4 w-4" />
-                <span className="sr-only">Remove image</span>
+                <span className="sr-only">移除圖片</span>
               </Button>
             </div>
           )}
 
           <Button onClick={handleSubmit} disabled={!file || loading}>
-            {loading ? "Analyzing..." : "Analyze Style"}
+            {loading ? "分析中..." : "分析風格"}
           </Button>
         </div>
 
         <div className="flex flex-col gap-4">
-          <h3 className="font-headline text-lg">Analysis Results</h3>
+          <h3 className="font-headline text-lg">分析結果</h3>
           <div className="min-h-[200px] rounded-lg border border-dashed border-muted p-4">
             {loading && (
               <div className="space-y-4">
@@ -208,7 +207,7 @@ export function StyleInsightEngine() {
             {result && (
               <div className="space-y-4">
                 <div>
-                  <h4 className="font-semibold">Visual Clusters</h4>
+                  <h4 className="font-semibold">視覺分類</h4>
                   <div className="mt-2 flex flex-wrap gap-2">
                     {result.visualClusters.map((cluster) => (
                       <Badge variant="secondary" key={cluster}>
@@ -218,7 +217,7 @@ export function StyleInsightEngine() {
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-semibold">Thematic Tags</h4>
+                  <h4 className="font-semibold">主題標籤</h4>
                   <div className="mt-2 flex flex-wrap gap-2">
                     {result.thematicTags.map((tag) => (
                       <Badge variant="outline" key={tag}>
@@ -231,7 +230,7 @@ export function StyleInsightEngine() {
             )}
             {!loading && !result && (
               <div className="flex h-full items-center justify-center text-muted-foreground">
-                <p>Results will appear here.</p>
+                <p>結果將會出現在這裡。</p>
               </div>
             )}
           </div>

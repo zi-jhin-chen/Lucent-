@@ -10,35 +10,35 @@ import { Bot, Palette, Sparkles } from "lucide-react";
 
 const mockTrail = [
   {
-    date: "3 days ago",
-    title: "Style Insight: Earthy & Grounded",
+    date: "3天前",
+    title: "風格洞察：大地與踏實",
     type: "style",
-    content: "Uploaded a moodboard of warm landscapes and natural textiles.",
-    tags: ["Earthy", "Grounded", "Autumnal"],
+    content: "上傳了一張包含溫暖地景和自然紡織品的風格板。",
+    tags: ["大地", "踏實", "秋日"],
   },
   {
-    date: "1 week ago",
-    title: "Alignment Score: 82%",
+    date: "1週前",
+    title: "一致性分數：82%",
     type: "alignment",
     content:
-      "Feedback noted a strong connection between your desire for calm and your content's serene aesthetic.",
-    tags: ["Alignment", "Calm", "Serene"],
+      "回饋指出，您對平靜的渴望與您內容的寧靜美學之間有很強的連結。",
+    tags: ["一致性", "平靜", "寧靜"],
   },
   {
-    date: "2 weeks ago",
-    title: "Compass Reading: Playful & Bright",
+    date: "2週前",
+    title: "羅盤讀取：俏皮與明亮",
     type: "compass",
     content:
-      "Suggested theme 'Dopamine Dressing' for Instagram to match a vibrant, energetic mood.",
-    tags: ["Compass", "Playful", "Bright"],
+      "建議在 Instagram 上使用「多巴胺穿搭」主題，以配合充滿活力的心情。",
+    tags: ["羅盤", "俏皮", "明亮"],
   },
   {
-    date: "1 month ago",
-    title: "Style Insight: Bold & Surreal",
+    date: "1個月前",
+    title: "風格洞察：大膽與超現實",
     type: "style",
     content:
-      "Analyzed an outfit with contrasting colors and architectural shapes.",
-    tags: ["Bold", "Surreal", "Contrast"],
+      "分析了一套具有對比色和建築形狀的穿搭。",
+    tags: ["大膽", "超現實", "對比"],
   },
 ];
 
@@ -52,10 +52,9 @@ export function GrowthTrail() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Reflection &amp; Growth Trail</CardTitle>
+        <CardTitle>反思與成長足跡</CardTitle>
         <CardDescription>
-          A visual memory thread of how your tone and vibe have shifted over
-          time. No numbers, just trace and pace.
+          一條視覺化的記憶線索，記錄您的風格和氛圍如何隨時間變化。沒有數字，只有追溯和步調。
         </CardDescription>
       </CardHeader>
       <CardContent>

@@ -14,19 +14,19 @@ import { Slider } from "@/components/ui/slider";
 
 const suggestions = {
   scattered: {
-    low: "It's okay to rest. Maybe just one gentle post, or none at all. Your presence is enough.",
-    medium: "Focus on one small thing. A single photo, a short thought. No pressure.",
-    high: "Channel that energy! Try a quick burst of posts, like an IG story series, then log off.",
+    low: "休息一下也無妨。或許只發一篇溫和的貼文，或者完全不發。您的存在就已足夠。",
+    medium: "專注於一件小事。一張照片，一個簡短的想法。沒有壓力。",
+    high: "引導那股能量！嘗試快速發布一系列貼文，像是IG限時動態系列，然後就下線。",
   },
   tired: {
-    low: "Permission to be offline. Rest is productive. Come back when you're ready.",
-    medium: "Share something simple that's already created. A past photo, a favorite quote.",
-    high: "A quick 'hello' is plenty. Don't push. Maybe reshare something that inspires you.",
+    low: "允許自己離線。休息是有效率的。準備好後再回來。",
+    medium: "分享一些已經創作好的簡單內容。一張過去的照片，一句喜歡的名言。",
+    high: "一句簡短的問候就足夠了。別勉強自己。或許可以轉發一些能激勵您的內容。",
   },
   inspired: {
-    low: "Capture the spark without needing to perfect it. A note, a voice memo, a draft.",
-    medium: "Ride the wave. Create and share what feels good. Don't overthink the schedule.",
-    high: "Flow with it! This is a great time for a series, a deep-dive post, or batch-creating content.",
+    low: "捕捉靈感火花，無需力求完美。一則筆記，一段語音備忘，一份草稿。",
+    medium: "順勢而為。創作並分享感覺良好的內容。不要過度思考排程。",
+    high: "隨心所欲！這是一個發布系列、深度貼文或批量創作內容的好時機。",
   },
 };
 
@@ -48,16 +48,15 @@ export function GentleCadencePlanner() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Gentle Cadence Planner</CardTitle>
+        <CardTitle>溫和節奏規劃器</CardTitle>
         <CardDescription>
-          An adaptive rhythm tracker. When you feel scattered or tired, it
-          recalibrates suggestions.
+          一個適應性節奏追蹤器。當您感到心煩意亂或疲憊時，它會重新校準建議。
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-8 md:grid-cols-2">
         <div className="space-y-6">
           <div>
-            <Label className="font-headline">How are you feeling today?</Label>
+            <Label className="font-headline">您今天感覺如何？</Label>
             <RadioGroup
               value={mood}
               onValueChange={(value) =>
@@ -67,21 +66,21 @@ export function GentleCadencePlanner() {
             >
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="scattered" id="mood-scattered" />
-                <Label htmlFor="mood-scattered">A bit scattered</Label>
+                <Label htmlFor="mood-scattered">有點心煩意亂</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="tired" id="mood-tired" />
-                <Label htmlFor="mood-tired">Feeling tired</Label>
+                <Label htmlFor="mood-tired">感到疲倦</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="inspired" id="mood-inspired" />
-                <Label htmlFor="mood-inspired">Feeling inspired</Label>
+                <Label htmlFor="mood-inspired">感到充滿靈感</Label>
               </div>
             </RadioGroup>
           </div>
           <div>
             <Label htmlFor="energy-slider" className="font-headline">
-              What's your energy level?
+              您的能量水平如何？
             </Label>
             <Slider
               id="energy-slider"
@@ -92,7 +91,7 @@ export function GentleCadencePlanner() {
           </div>
         </div>
         <div className="flex flex-col">
-          <h3 className="font-headline text-lg">Your Gentle Suggestion</h3>
+          <h3 className="font-headline text-lg">您的溫和建議</h3>
           <div className="flex-1 mt-2 rounded-lg border border-dashed border-muted bg-accent/30 p-6 flex items-center justify-center">
             <p className="text-center text-accent-foreground">{suggestion}</p>
           </div>

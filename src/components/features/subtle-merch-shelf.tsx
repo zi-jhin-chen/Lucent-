@@ -66,9 +66,9 @@ export function SubtleMerchShelf({ open, onOpenChange }: SubtleMerchShelfProps) 
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="sm:max-w-md">
         <SheetHeader>
-          <SheetTitle>Subtle Merch Shelf</SheetTitle>
+          <SheetTitle>風格商品架</SheetTitle>
           <SheetDescription>
-            A curated selection of items with a similar tone and aesthetic.
+            精選風格與美感相似的商品。
           </SheetDescription>
         </SheetHeader>
         <div className="mt-4 grid grid-cols-2 gap-4">

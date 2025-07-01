@@ -1,11 +1,11 @@
 'use server';
 
 /**
- * @fileOverview Style Insight Engine for identifying visual clusters and thematic tags from uploaded images.
+ * @fileOverview 風格洞察引擎，用於從上傳的圖片中識別視覺分類和主題標籤。
  *
- * - analyzeStyle - A function that handles the style analysis process.
- * - AnalyzeStyleInput - The input type for the analyzeStyle function, which is a data URI of an image.
- * - AnalyzeStyleOutput - The return type for the analyzeStyle function, which includes visual clusters and thematic tags.
+ * - analyzeStyle - 處理風格分析流程的函式。
+ * - AnalyzeStyleInput - analyzeStyle 函式的輸入型別，為圖片的 data URI。
+ * - AnalyzeStyleOutput - analyzeStyle 函式的回傳型別，包含視覺分類和主題標籤。
  */
 
 import {ai} from '@/ai/genkit';
@@ -15,7 +15,7 @@ const AnalyzeStyleInputSchema = z.object({
   photoDataUri: z
     .string()
     .describe(
-      "A photo representing a moodboard or outfit, as a data URI that must include a MIME type and use Base64 encoding. Expected format: 'data:<mimetype>;base64,<encoded_data>'."
+      "代表風格板或穿搭的照片，格式為包含 MIME 類型並使用 Base64 編碼的 data URI。預期格式：'data:<mimetype>;base64,<encoded_data>'。"
     ),
 });
 export type AnalyzeStyleInput = z.infer<typeof AnalyzeStyleInputSchema>;
@@ -23,10 +23,10 @@ export type AnalyzeStyleInput = z.infer<typeof AnalyzeStyleInputSchema>;
 const AnalyzeStyleOutputSchema = z.object({
   visualClusters: z
     .array(z.string())
-    .describe('List of visual clusters identified in the image (e.g., earthy, bold, minimalist).'),
+    .describe('在圖片中識別出的視覺分類清單（例如，大地色系、大膽、極簡）。'),
   thematicTags: z
     .array(z.string())
-    .describe('List of thematic tags associated with the image (e.g., grounded, surreal, early summer calm).'),
+    .describe('與圖片相關的主題標籤清單（例如，踏實、超現實、初夏寧靜）。'),
 });
 export type AnalyzeStyleOutput = z.infer<typeof AnalyzeStyleOutputSchema>;
 
@@ -38,7 +38,7 @@ const prompt = ai.definePrompt({
   name: 'analyzeStylePrompt',
   input: {schema: AnalyzeStyleInputSchema},
   output: {schema: AnalyzeStyleOutputSchema},
-  prompt: `Analyze the style of the image provided. Identify visual clusters and thematic tags that describe the style. Return the visual clusters and thematic tags as lists of strings.
+  prompt: `分析所提供圖片的風格。識別描述該風格的視覺分類和主題標籤。以字串清單的形式回傳視覺分類和主題標籤。
 
 Image: {{media url=photoDataUri}}`,
 });

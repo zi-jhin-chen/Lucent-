@@ -23,7 +23,7 @@ export async function runAnalyzeStyle(input: AnalyzeStyleInput) {
     return { success: true, data: result };
   } catch (error) {
     console.error(error);
-    return { success: false, error: "Failed to analyze style." };
+    return { success: false, error: "風格分析失敗。" };
   }
 }
 
@@ -35,7 +35,7 @@ export async function runIdentityAlignment(
     return { success: true, data: result };
   } catch (error) {
     console.error(error);
-    return { success: false, error: "Failed to run alignment check." };
+    return { success: false, error: "執行一致性檢查失敗。" };
   }
 }
 
@@ -47,7 +47,7 @@ export async function runSeasonalContentCompass(
     return { success: true, data: result };
   } catch (error) {
     console.error(error);
-    return { success: false, error: "Failed to get content suggestions." };
+    return { success: false, error: "取得內容建議失敗。" };
   }
 }
 
@@ -57,6 +57,6 @@ export async function runAiOutfitVisualizer(input: AiOutfitVisualizerInput) {
     return { success: true, data: result };
   } catch (error) {
     console.error(error);
-    return { success: false, error: "Failed to visualize outfit." };
+    return { success: false, error: "穿搭模擬失敗。" };
   }
 }

@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
 import { runAiOutfitVisualizer } from "@/app/actions";
-import { UploadCloud, X, ShoppingBag } from "lucide-react";
+import { UploadCloud, X, ShoppingBag, ImageIcon } from "lucide-react";
 import type { AiOutfitVisualizerOutput } from "@/ai/flows/ai-outfit-visualizer";
 import { SubtleMerchShelf } from "./subtle-merch-shelf";
 
@@ -32,8 +32,8 @@ export function OutfitVisualizer() {
     if (selectedFile) {
       if (selectedFile.size > 4 * 1024 * 1024) {
         toast({
-          title: "File too large",
-          description: "Please upload an image smaller than 4MB.",
+          title: "檔案太大",
+          description: "請上傳小於 4MB 的圖片。",
           variant: "destructive",
         });
         return;
@@ -69,7 +69,7 @@ export function OutfitVisualizer() {
 
   const handleSubmit = async () => {
     if (!file) {
-      toast({ title: "No file selected", description: "Please upload an outfit photo.", variant: "destructive" });
+      toast({ title: "未選擇檔案", description: "請上傳穿搭照片。", variant: "destructive" });
       return;
     }
 
@@ -85,12 +85,12 @@ export function OutfitVisualizer() {
       if (response.success && response.data) {
         setResult(response.data);
       } else {
-        toast({ title: "Visualization Failed", description: response.error, variant: "destructive" });
+        toast({ title: "模擬失敗", description: response.error, variant: "destructive" });
       }
       setLoading(false);
     };
     reader.onerror = () => {
-      toast({ title: "File Read Error", description: "Could not read the selected file.", variant: "destructive" });
+      toast({ title: "檔案讀取錯誤", description: "無法讀取所選檔案。", variant: "destructive" });
       setLoading(false);
     };
   };
@@ -99,10 +99,9 @@ export function OutfitVisualizer() {
     <>
       <Card>
         <CardHeader>
-          <CardTitle>AI Outfit Visualizer</CardTitle>
+          <CardTitle>AI 穿搭模擬器</CardTitle>
           <CardDescription>
-            Upload an outfit photo to identify items and visualize them on a
-            neutral model.
+            上傳一張穿搭照片，以識別其中的單品並在虛擬模特兒身上進行模擬。
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-6 md:grid-cols-2">
@@ -114,8 +113,8 @@ export function OutfitVisualizer() {
                 onDragEnter={handleDragEnter} onDragLeave={handleDragLeave} onDragOver={handleDragOver} onDrop={handleDrop}
               >
                 <UploadCloud className="h-10 w-10 text-muted-foreground" />
-                <span className="font-medium text-primary">Upload an outfit photo</span>
-                <span className="text-sm text-muted-foreground">PNG, JPG, GIF up to 4MB</span>
+                <span className="font-medium text-primary">上傳穿搭照片</span>
+                <span className="text-sm text-muted-foreground">支援 PNG, JPG, GIF 格式，最大 4MB</span>
                 <Input id="outfit-file" type="file" className="absolute inset-0 h-full w-full cursor-pointer opacity-0" onChange={onFileChange} accept="image/*" />
               </label>
             ) : (
@@ -123,27 +122,28 @@ export function OutfitVisualizer() {
                 <Image src={previewUrl} alt="Outfit preview" fill className="object-cover" />
                 <Button size="icon" variant="destructive" className="absolute right-2 top-2 h-8 w-8 rounded-full" onClick={clearFile}>
                   <X className="h-4 w-4" />
+                  <span className="sr-only">移除圖片</span>
                 </Button>
               </div>
             )}
             <Button onClick={handleSubmit} disabled={!file || loading}>
-              {loading ? "Visualizing..." : "Visualize Outfit"}
+              {loading ? "模擬中..." : "模擬穿搭"}
             </Button>
           </div>
 
           <div className="flex flex-col gap-4">
-            <h3 className="font-headline text-lg">Visualization Results</h3>
+            <h3 className="font-headline text-lg">模擬結果</h3>
             <div className="min-h-[200px] space-y-4 rounded-lg border border-dashed border-muted p-4">
               {loading && <Skeleton className="h-full w-full" />}
               {result && (
                 <div>
-                  <h4 className="font-semibold">Overall Style</h4>
+                  <h4 className="font-semibold">整體風格</h4>
                   <p className="text-sm text-muted-foreground">{result.overallStyleDescription}</p>
                 </div>
               )}
                {!loading && !result && (
                 <div className="flex h-full items-center justify-center text-muted-foreground">
-                  <p>Results will appear here.</p>
+                  <p>結果將會出現在這裡。</p>
                 </div>
               )}
             </div>
@@ -152,9 +152,9 @@ export function OutfitVisualizer() {
         {result && (
           <CardFooter className="flex-col items-start gap-4">
             <div className="flex w-full items-center justify-between">
-              <h3 className="font-headline text-lg">Identified Items</h3>
+              <h3 className="font-headline text-lg">已識別單品</h3>
               <Button variant="outline" size="sm" onClick={() => setIsShelfOpen(true)}>
-                <ShoppingBag className="mr-2 h-4 w-4" /> Find Similar Items
+                <ShoppingBag className="mr-2 h-4 w-4" /> 尋找相似單品
               </Button>
             </div>
             <div className="grid w-full grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">

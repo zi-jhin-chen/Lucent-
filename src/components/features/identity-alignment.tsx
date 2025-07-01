@@ -31,10 +31,10 @@ import type { IdentityExpressionAlignmentOutput } from "@/ai/flows/identity-expr
 const formSchema = z.object({
   questionnaireResponses: z
     .string()
-    .min(10, "Please share a bit more about your current mood and feelings."),
+    .min(10, "請多分享一些關於您目前心情和感受的資訊。"),
   contentExamples: z
     .string()
-    .min(10, "Please provide some examples of your recent content."),
+    .min(10, "請提供一些您最近的內容範例。"),
 });
 
 export function IdentityAlignment() {
@@ -62,7 +62,7 @@ export function IdentityAlignment() {
       setResult(response.data);
     } else {
       toast({
-        title: "Analysis Failed",
+        title: "分析失敗",
         description: response.error,
         variant: "destructive",
       });
@@ -73,10 +73,9 @@ export function IdentityAlignment() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Identity–Expression Alignment</CardTitle>
+        <CardTitle>身分認同與表達一致性</CardTitle>
         <CardDescription>
-          This mood-first questionnaire helps map where your content may or may
-          not reflect who you are becoming.
+          這份以情緒為先的問卷，幫助您了解您的內容在多大程度上反映了您正在成為的自己。
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-6 md:grid-cols-2">
@@ -87,10 +86,10 @@ export function IdentityAlignment() {
               name="questionnaireResponses"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Mood &amp; Identity Reflection</FormLabel>
+                  <FormLabel>情緒與身分認同反思</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Describe your current mood, what you're aspiring towards, or how you want to be perceived right now..."
+                      placeholder="描述您當前的心情、您的期許，或您希望現在給人什麼樣的感覺..."
                       className="min-h-[120px]"
                       {...field}
                     />
@@ -104,10 +103,10 @@ export function IdentityAlignment() {
               name="contentExamples"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Recent Content Examples</FormLabel>
+                  <FormLabel>近期內容範例</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Paste in text from a few recent posts, a description of your latest project, or your current bio..."
+                      placeholder="貼上幾篇近期貼文的文字、您最新專案的描述，或您目前的個人簡介..."
                       className="min-h-[120px]"
                       {...field}
                     />
@@ -117,13 +116,13 @@ export function IdentityAlignment() {
               )}
             />
             <Button type="submit" disabled={loading}>
-              {loading ? "Analyzing..." : "Check Alignment"}
+              {loading ? "分析中..." : "檢查一致性"}
             </Button>
           </form>
         </Form>
 
         <div className="flex flex-col gap-4">
-          <h3 className="font-headline text-lg">Alignment Report</h3>
+          <h3 className="font-headline text-lg">一致性報告</h3>
           <div className="min-h-[300px] rounded-lg border border-dashed border-muted p-4">
             {loading && (
               <div className="space-y-4">
@@ -139,7 +138,7 @@ export function IdentityAlignment() {
             {result && (
               <div className="space-y-4">
                 <div>
-                  <h4 className="font-semibold">Alignment Score</h4>
+                  <h4 className="font-semibold">一致性分數</h4>
                   <div className="mt-2 flex items-center gap-4">
                     <Progress value={result.alignmentScore} className="w-full" />
                     <span className="font-mono text-lg font-medium">
@@ -148,7 +147,7 @@ export function IdentityAlignment() {
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-semibold">Feedback &amp; Suggestions</h4>
+                  <h4 className="font-semibold">回饋與建議</h4>
                   <p className="mt-2 text-sm text-foreground/80 whitespace-pre-wrap">
                     {result.feedback}
                   </p>
@@ -157,7 +156,7 @@ export function IdentityAlignment() {
             )}
             {!loading && !result && (
               <div className="flex h-full items-center justify-center text-muted-foreground">
-                <p>Your alignment report will appear here.</p>
+                <p>您的一致性報告將會出現在這裡。</p>
               </div>
             )}
           </div>
